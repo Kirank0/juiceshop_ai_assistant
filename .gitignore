@@ -78,3 +78,6 @@ cypress/screenshots/
 ai_assistant/.venv/
 __pycache__/
 .pytest_cache/
+
+# the root "app/" rule above would otherwise hide the AI assistant source
+!ai_assistant/app/
