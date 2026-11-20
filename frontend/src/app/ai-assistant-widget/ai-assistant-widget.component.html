@@ -1,0 +1,52 @@
+<!--
+  ~ Copyright (c) 2014-2026 Bjoern Kimminich & the OWASP Juice Shop contributors.
+  ~ SPDX-License-Identifier: MIT
+  -->
+
+@if (isOpen()) {
+  <mat-card class="ai-assistant-panel mat-elevation-z8" role="dialog" aria-label="Product assistant">
+    <div class="ai-assistant-header">
+      <mat-icon>support_agent</mat-icon>
+      <span class="ai-assistant-title">Product Assistant</span>
+      <button mat-icon-button aria-label="Close assistant" (click)="toggle()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div class="ai-assistant-messages" #messageList aria-live="polite">
+      @for (message of messages(); track $index) {
+        <div class="ai-assistant-message" [class.from-user]="message.role === 'user'">{{ message.content }}</div>
+      }
+      @if (isLoading()) {
+        <div class="ai-assistant-message ai-assistant-typing">Typing…</div>
+      }
+      @if (error()) {
+        <div class="ai-assistant-error">{{ error() }}</div>
+      }
+    </div>
+
+    <div class="ai-assistant-input">
+      <textarea
+        rows="1"
+        maxlength="1000"
+        placeholder="Ask about products or prices…"
+        aria-label="Your message"
+        [(ngModel)]="draft"
+        (keydown)="onKeydown($event)"></textarea>
+      <button mat-icon-button color="primary" aria-label="Send message" [disabled]="isLoading() || !draft.trim()" (click)="send()">
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+  </mat-card>
+}
+
+<button
+  mat-fab
+  color="primary"
+  class="ai-assistant-fab"
+  [attr.aria-label]="isOpen() ? 'Close product assistant' : 'Open product assistant'"
+  matTooltip="Product assistant"
+  matTooltipPosition="left"
+  (click)="toggle()">
+  <mat-icon>{{ isOpen() ? 'close' : 'chat' }}</mat-icon>
+</button>

@@ -8,5 +8,6 @@
 // same-origin, which is required for the `token` cookie to be sent along.
 export const environment = {
   production: false,
-  hostServer: '.'
+  hostServer: '.',
+  aiAssistantUrl: 'http://localhost:8000'
 }

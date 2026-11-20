@@ -73,3 +73,8 @@ config/*.yml
 cypress/screenshots/
 
 .env.openai
+
+# AI assistant (Python)
+ai_assistant/.venv/
+__pycache__/
+.pytest_cache/

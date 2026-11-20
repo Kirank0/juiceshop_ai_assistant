@@ -31,3 +31,9 @@ scripts/
 terraform/
 test/
 vagrant/
+
+# Secrets and the separate AI assistant service (built from ai_assistant/Dockerfile)
+.env*
+ai_assistant/
+# local runtime database; the container creates its own
+data/*.sqlite
